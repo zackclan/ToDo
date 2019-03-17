@@ -3,17 +3,32 @@ const sample = {
   title: "Groceries",
   description: "Thing to get at the store",
   dueDate: "Tomorrow",
-  priority: "1",
+  priority: "Low",
   tasks: ["2lbs ground beef", "1lb onions", "1 bag carrots"]
 };
-projects.push(sample);
-render(sample);
-console.log(sample.tasks);
-sample.tasks.map(x => renderTask(x, 0));
-$("#project0")
-  .children()
-  .eq(6)
-  .toggleClass("changed");
+const sample2 = {
+  title: "Finish school final",
+  description: "PHY 410",
+  dueDate: "05/13/19",
+  priority: "Top",
+  tasks: [
+    "Finish reading PHY410 textbook",
+    "Conduct experiments at end of book",
+    "Meet with study group"
+  ]
+};
+const addsamples = (sample, projectId) => {
+  projects.push(sample);
+  render(sample);
+  console.log(sample.tasks);
+  sample.tasks.map(x => renderTask(x, projectId));
+  $(`#project${projectId}`)
+    .children()
+    .eq(6)
+    .toggleClass("changed");
+};
+addsamples(sample, 0);
+addsamples(sample2, 1);
 
 let formButton = document.querySelector(".addproject");
 formButton.addEventListener("click", addProjects);
